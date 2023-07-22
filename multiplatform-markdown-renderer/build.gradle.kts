@@ -1,5 +1,3 @@
-import org.jetbrains.compose.compose
-
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
@@ -23,6 +21,12 @@ android {
             )
         }
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    namespace = "com.mikepenz.markdown"
 }
 
 kotlin {
@@ -46,7 +50,7 @@ kotlin {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:+")
+    implementation("androidx.core:core-ktx:1.9.0")
     commonMainApi(Deps.Markdown.core)
 
     commonMainCompileOnly(compose.runtime)
@@ -65,11 +69,10 @@ tasks.dokkaHtml.configure {
     }
 }
 
-tasks.create<Jar>("javadocJar") {
-    dependsOn("dokkaJavadoc")
-    classifier = "javadoc"
-    from("$buildDir/javadoc")
-}
+//tasks.create<Jar>("javadocJar") {
+//    dependsOn("dokkaJavadoc")
+//    from("$buildDir/javadoc")
+//}
 
 //mavenPublish {
 //    releaseSigningEnabled = true

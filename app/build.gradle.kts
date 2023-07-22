@@ -13,7 +13,7 @@ android {
     compileSdk = Versions.androidCompileSdk
 
     defaultConfig {
-        applicationId = "com.mikepenz.markdown"
+        applicationId = "com.yiyitec.markdown"
         minSdk = Versions.androidMinSdk
         targetSdk = Versions.androidTargetSdk
 
@@ -49,24 +49,20 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
-    packagingOptions {
-        resources.excludes.add("META-INF/licenses/**")
-        resources.excludes.add("META-INF/AL2.0")
-        resources.excludes.add("META-INF/LGPL2.1")
-    }
+    namespace = "com.yiyitec.tc"
 }
 
 dependencies {
     implementation(project(":multiplatform-markdown-renderer"))
-    implementation("androidx.core:core-ktx:+")
+    implementation("androidx.core:core-ktx:1.9.0")
 
     with(Deps.Android) {
         implementation(material)

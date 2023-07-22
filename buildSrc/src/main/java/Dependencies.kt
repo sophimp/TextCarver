@@ -1,6 +1,6 @@
 object Versions {
     const val androidMinSdk = 21
-    const val androidCompileSdk = 33
+    const val androidCompileSdk = 34
     const val androidTargetSdk = androidCompileSdk
 
     const val kotlin = "1.8.20"
@@ -9,7 +9,7 @@ object Versions {
 
     const val coil = "2.1.0"
     const val compose = "1.4.3"
-    const val composeCompiler = "1.4.4"
+    const val composeCompiler = "1.4.6"
 
     const val material = "1.6.1"
     const val activityCompose = "1.5.1"
