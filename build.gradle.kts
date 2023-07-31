@@ -31,11 +31,3 @@ allprojects {
         }
     }
 }
-
-subprojects {
-    apply(from = "../detekt.gradle")
-
-    dependencies {
-        "detektPlugins"("io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0")
-    }
-}

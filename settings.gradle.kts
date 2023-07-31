@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-plugin")
     repositories {
         gradlePluginPortal()
         mavenCentral()
@@ -8,6 +9,11 @@ pluginManagement {
 
 rootProject.name = "TextCarver"
 
-include(":multiplatform-markdown-renderer")
-include(":app")
-include(":compose-desktop")
+include(":rich-editor")
+include(
+    ":sample:android",
+    ":sample:desktop",
+    ":sample:web",
+    ":sample:common",
+    ":richeditor-compose"
+)
