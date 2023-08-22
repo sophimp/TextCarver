@@ -9,7 +9,7 @@ jetbrainsMarkdown = "0.3.1"
 
 # For sample
 compose-compiler = "1.4.6"
-activity-compose = "1.7.0"
+activity-compose = "1.7.2"
 voyager = "1.0.0-rc05"
 richeditor = "1.0.0-beta01"
 android-minSdk = "21"

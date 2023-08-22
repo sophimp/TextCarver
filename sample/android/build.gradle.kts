@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    namespace = "com.mohamedrejeb.richeditor.android"
+    namespace = "com.yiyitec.richeditor.android"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.compileSdk.get().toInt()
 
-        applicationId = "com.mohamedrejeb.richeditor.android"
+        applicationId = "com.yiyitec.richeditor.android"
         versionCode = 1
         versionName = "1.0"
     }
@@ -24,11 +24,11 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     dependencies {
         implementation(project(":sample:common"))

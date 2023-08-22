@@ -9,7 +9,7 @@ kotlin {
     android {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "11"
             }
         }
     }
@@ -53,8 +53,7 @@ kotlin {
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 api(compose.components.resources)
 
-                implementation("com.mohamedrejeb.richeditor:richeditor-compose:1.0.0-beta01")
-//                implementation(project(":richeditor-compose"))
+                implementation(project(":rich-editor"))
 
                 // Voyager Navigator
                 implementation(libs.voyager.navigator)
@@ -97,7 +96,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.mohamedrejeb.richeditor.sample.common"
+    namespace = "com.yiyitec.richeditor.sample.common"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 

@@ -14,6 +14,5 @@ include(
     ":sample:android",
     ":sample:desktop",
     ":sample:web",
-    ":sample:common",
-    ":richeditor-compose"
+    ":sample:common"
 )
