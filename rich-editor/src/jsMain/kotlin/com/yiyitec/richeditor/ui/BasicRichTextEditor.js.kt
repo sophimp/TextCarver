@@ -5,7 +5,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
-import com.yiyitec.richeditor.model.RichTextState
 import kotlinx.coroutines.CoroutineScope
 
 internal actual fun Modifier.adjustTextIndicatorOffset(

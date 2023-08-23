@@ -1,8 +1,8 @@
 package com.yiyitec.richeditor.parser.html
 
 import androidx.compose.ui.text.SpanStyle
-import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlHandler
-import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlParser
+//import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlHandler
+//import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlParser
 import com.yiyitec.richeditor.model.*
 import com.yiyitec.richeditor.parser.RichTextStateParser
 import com.yiyitec.richeditor.parser.utils.*
@@ -22,147 +22,147 @@ internal object RichTextStateHtmlParser : RichTextStateParser<String> {
 
         var skipText = false
 
-        val handler = KsoupHtmlHandler
-            .Builder()
-            .onText {
-                if (skipText) return@onText
+//        val handler = KsoupHtmlHandler
+//            .Builder()
+//            .onText {
+//                if (skipText) return@onText
+//
+//                val lastOpenedTag = openedTags.lastOrNull()?.first
+//                if (lastOpenedTag in skippedHtmlElements) return@onText
+//
+//                val addedText = removeHtmlTextExtraSpaces(
+//                    input = it,
+//                    trimStart = stringBuilder.lastOrNull() == ' ' || stringBuilder.lastOrNull() == '\n',
+//                )
+//                if (addedText.isEmpty()) return@onText
+//
+//                if (lastClosedTag in htmlBlockElements) {
+//                    if (addedText.isBlank()) return@onText
+//                    lastClosedTag = null
+//                    currentRichSpan = null
+//                    richParagraphList.add(RichParagraph())
+//                }
+//
+//                stringBuilder.append(addedText)
+//
+//                if (richParagraphList.isEmpty())
+//                    richParagraphList.add(RichParagraph())
+//
+//                val currentRichParagraph = richParagraphList.last()
+//                val safeCurrentRichSpan = currentRichSpan ?: RichSpan(paragraph = currentRichParagraph)
+//
+//                if (safeCurrentRichSpan.children.isEmpty()) {
+//                    safeCurrentRichSpan.text += addedText
+//                } else {
+//                    val newRichSpan = RichSpan(paragraph = currentRichParagraph)
+//                    newRichSpan.text = addedText
+//                    safeCurrentRichSpan.children.add(newRichSpan)
+//                }
+//
+//                if (currentRichSpan == null) {
+//                    currentRichSpan = safeCurrentRichSpan
+//                    currentRichParagraph.children.add(safeCurrentRichSpan)
+//                }
+//            }
+//            .onOpenTag { name, attributes, _ ->
+//                openedTags.add(name to attributes)
+//
+//                if (name == "ul" || name == "ol") {
+//                    skipText = true
+//                    return@onOpenTag
+//                }
+//
+//                val cssStyleMap = attributes["style"]?.let { CssEncoder.parseCssStyle(it) } ?: emptyMap()
+//                val cssSpanStyle = CssEncoder.parseCssStyleMapToSpanStyle(cssStyleMap)
+//                val tagSpanStyle = htmlElementsSpanStyleEncodeMap[name]
+//
+//                if (name in htmlBlockElements) {
+//                    stringBuilder.append(' ')
+//
+//                    val newRichParagraph = RichParagraph()
+//                    var paragraphType: RichParagraph.Type = RichParagraph.Type.Default
+//                    if (name == "li") {
+//                        skipText = false
+//                        openedTags.getOrNull(openedTags.lastIndex - 1)?.first?.let { lastOpenedTag ->
+//                            paragraphType = encodeHtmlElementToRichParagraphType(lastOpenedTag)
+//                        }
+//                    }
+//                    val cssParagraphStyle = CssEncoder.parseCssStyleMapToParagraphStyle(cssStyleMap)
+//
+//                    newRichParagraph.paragraphStyle = cssParagraphStyle
+//                    newRichParagraph.type = paragraphType
+//                    richParagraphList.add(newRichParagraph)
+//
+//                    val newRichSpan = RichSpan(paragraph = newRichParagraph)
+//                    newRichSpan.spanStyle = cssSpanStyle.customMerge(tagSpanStyle)
+//
+//                    if (newRichSpan.spanStyle != SpanStyle()) {
+//                        currentRichSpan = newRichSpan
+//                        newRichParagraph.children.add(newRichSpan)
+//                    } else {
+//                        currentRichSpan = null
+//                    }
+//                } else if (name != "br") {
+//                    if (lastClosedTag in htmlBlockElements) {
+//                        lastClosedTag = null
+//                        currentRichSpan = null
+//                        richParagraphList.add(RichParagraph())
+//                    }
+//
+//                    val richSpanStyle = encodeHtmlElementToRichSpanStyle(name, attributes)
+//
+//                    if (richParagraphList.isEmpty())
+//                        richParagraphList.add(RichParagraph())
+//
+//                    val currentRichParagraph = richParagraphList.last()
+//                    val newRichSpan = RichSpan(paragraph = currentRichParagraph)
+//                    newRichSpan.spanStyle = cssSpanStyle.customMerge(tagSpanStyle)
+//                    newRichSpan.style = richSpanStyle
+//
+//                    if (currentRichSpan != null) {
+//                        newRichSpan.parent = currentRichSpan
+//                        currentRichSpan?.children?.add(newRichSpan)
+//                    } else {
+//                        currentRichParagraph.children.add(newRichSpan)
+//                    }
+//                    currentRichSpan = newRichSpan
+//                }
+//
+//                when (name) {
+//                    "br" -> {
+//                        stringBuilder.append(' ')
+//
+//                        if (richParagraphList.isEmpty())
+//                            richParagraphList.add(RichParagraph())
+//
+//                        val currentRichParagraph = richParagraphList.last()
+//                        val newParagraph = RichParagraph(paragraphStyle = currentRichParagraph.paragraphStyle)
+//                        richParagraphList.add(newParagraph)
+//                        currentRichSpan = null
+//                    }
+//                }
+//
+//                lastClosedTag = null
+//            }
+//            .onCloseTag { name, _ ->
+//                openedTags.removeLastOrNull()
+//                lastClosedTag = name
+//
+//                if (name == "ul" || name == "ol") {
+//                    skipText = false
+//                    return@onCloseTag
+//                }
+//
+//                currentRichSpan = currentRichSpan?.parent
+//            }
+//            .build()
 
-                val lastOpenedTag = openedTags.lastOrNull()?.first
-                if (lastOpenedTag in skippedHtmlElements) return@onText
+//        val parser = KsoupHtmlParser(
+//            handler = handler
+//        )
 
-                val addedText = removeHtmlTextExtraSpaces(
-                    input = it,
-                    trimStart = stringBuilder.lastOrNull() == ' ' || stringBuilder.lastOrNull() == '\n',
-                )
-                if (addedText.isEmpty()) return@onText
-
-                if (lastClosedTag in htmlBlockElements) {
-                    if (addedText.isBlank()) return@onText
-                    lastClosedTag = null
-                    currentRichSpan = null
-                    richParagraphList.add(RichParagraph())
-                }
-
-                stringBuilder.append(addedText)
-
-                if (richParagraphList.isEmpty())
-                    richParagraphList.add(RichParagraph())
-
-                val currentRichParagraph = richParagraphList.last()
-                val safeCurrentRichSpan = currentRichSpan ?: RichSpan(paragraph = currentRichParagraph)
-
-                if (safeCurrentRichSpan.children.isEmpty()) {
-                    safeCurrentRichSpan.text += addedText
-                } else {
-                    val newRichSpan = RichSpan(paragraph = currentRichParagraph)
-                    newRichSpan.text = addedText
-                    safeCurrentRichSpan.children.add(newRichSpan)
-                }
-
-                if (currentRichSpan == null) {
-                    currentRichSpan = safeCurrentRichSpan
-                    currentRichParagraph.children.add(safeCurrentRichSpan)
-                }
-            }
-            .onOpenTag { name, attributes, _ ->
-                openedTags.add(name to attributes)
-
-                if (name == "ul" || name == "ol") {
-                    skipText = true
-                    return@onOpenTag
-                }
-
-                val cssStyleMap = attributes["style"]?.let { CssEncoder.parseCssStyle(it) } ?: emptyMap()
-                val cssSpanStyle = CssEncoder.parseCssStyleMapToSpanStyle(cssStyleMap)
-                val tagSpanStyle = htmlElementsSpanStyleEncodeMap[name]
-
-                if (name in htmlBlockElements) {
-                    stringBuilder.append(' ')
-
-                    val newRichParagraph = RichParagraph()
-                    var paragraphType: RichParagraph.Type = RichParagraph.Type.Default
-                    if (name == "li") {
-                        skipText = false
-                        openedTags.getOrNull(openedTags.lastIndex - 1)?.first?.let { lastOpenedTag ->
-                            paragraphType = encodeHtmlElementToRichParagraphType(lastOpenedTag)
-                        }
-                    }
-                    val cssParagraphStyle = CssEncoder.parseCssStyleMapToParagraphStyle(cssStyleMap)
-
-                    newRichParagraph.paragraphStyle = cssParagraphStyle
-                    newRichParagraph.type = paragraphType
-                    richParagraphList.add(newRichParagraph)
-
-                    val newRichSpan = RichSpan(paragraph = newRichParagraph)
-                    newRichSpan.spanStyle = cssSpanStyle.customMerge(tagSpanStyle)
-
-                    if (newRichSpan.spanStyle != SpanStyle()) {
-                        currentRichSpan = newRichSpan
-                        newRichParagraph.children.add(newRichSpan)
-                    } else {
-                        currentRichSpan = null
-                    }
-                } else if (name != "br") {
-                    if (lastClosedTag in htmlBlockElements) {
-                        lastClosedTag = null
-                        currentRichSpan = null
-                        richParagraphList.add(RichParagraph())
-                    }
-
-                    val richSpanStyle = encodeHtmlElementToRichSpanStyle(name, attributes)
-
-                    if (richParagraphList.isEmpty())
-                        richParagraphList.add(RichParagraph())
-
-                    val currentRichParagraph = richParagraphList.last()
-                    val newRichSpan = RichSpan(paragraph = currentRichParagraph)
-                    newRichSpan.spanStyle = cssSpanStyle.customMerge(tagSpanStyle)
-                    newRichSpan.style = richSpanStyle
-
-                    if (currentRichSpan != null) {
-                        newRichSpan.parent = currentRichSpan
-                        currentRichSpan?.children?.add(newRichSpan)
-                    } else {
-                        currentRichParagraph.children.add(newRichSpan)
-                    }
-                    currentRichSpan = newRichSpan
-                }
-
-                when (name) {
-                    "br" -> {
-                        stringBuilder.append(' ')
-
-                        if (richParagraphList.isEmpty())
-                            richParagraphList.add(RichParagraph())
-
-                        val currentRichParagraph = richParagraphList.last()
-                        val newParagraph = RichParagraph(paragraphStyle = currentRichParagraph.paragraphStyle)
-                        richParagraphList.add(newParagraph)
-                        currentRichSpan = null
-                    }
-                }
-
-                lastClosedTag = null
-            }
-            .onCloseTag { name, _ ->
-                openedTags.removeLastOrNull()
-                lastClosedTag = name
-
-                if (name == "ul" || name == "ol") {
-                    skipText = false
-                    return@onCloseTag
-                }
-
-                currentRichSpan = currentRichSpan?.parent
-            }
-            .build()
-
-        val parser = KsoupHtmlParser(
-            handler = handler
-        )
-
-        parser.write(input)
-        parser.end()
+//        parser.write(input)
+//        parser.end()
 
         return RichTextState(
             initialRichParagraphList = richParagraphList,

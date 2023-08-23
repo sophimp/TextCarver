@@ -6,10 +6,10 @@ plugins {
 
 kotlin {
     android {
-        publishLibraryVariants("debug", "release")
+//        publishLibraryVariants("debug", "release")
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "11"
             }
         }
     }
@@ -32,7 +32,7 @@ kotlin {
                 implementation(compose.material3)
 
                 // HTML parsing library
-                implementation(libs.ksoup)
+//                implementation(libs.ksoup)
 
                 // Markdown parsing library
                 implementation(libs.jetbrains.markdown)
@@ -77,5 +77,10 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
